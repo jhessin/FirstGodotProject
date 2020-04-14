@@ -10,6 +10,7 @@ var vel: Vector2 = Vector2()
 
 onready var sprite: Sprite = get_node("Sprite")
 onready var ui: Node = get_node('/root/MainScene/CanvasLayer/UI')
+onready var audioPlayer: Node = get_node('/root/MainScene/Camera2D/AudioPlayer')
 
 func _physics_process(delta):
   vel.x = 0
@@ -43,3 +44,4 @@ func _on_Enemy_body_entered(body):
 func collect_coin(value):
   score += value
   ui.set_score_text(score)
+  audioPlayer.play_coin_sfx()

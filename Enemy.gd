@@ -2,9 +2,11 @@ extends Area2D
 
 export var speed: int = 100
 export var moveDist: int = 100
+export var rotate_speed: float = 20.0
 
 onready var startX: int = position.x
 onready var targetX: int = position.x + moveDist
+onready var sprite: Sprite = get_node("Sprite")
 
 func _process(delta):
   position.x = move_to(position.x, targetX, speed * delta)
@@ -22,6 +24,7 @@ func move_to(current, to, step):
 
   if new < to:
     # moving forward
+    sprite.rotate(rotate_speed)
     new += step
 
     # clamp to path
@@ -29,6 +32,7 @@ func move_to(current, to, step):
       new = to
   else:
     # moving backward
+    sprite.rotate(-rotate_speed)
     new -= step
 
     # clamp to path
