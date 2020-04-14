@@ -9,7 +9,7 @@ var gravity: int = 800
 var vel: Vector2 = Vector2()
 
 onready var sprite: Sprite = get_node("Sprite")
-
+onready var ui: Node = get_node('/root/MainScene/CanvasLayer/UI')
 
 func _physics_process(delta):
   vel.x = 0
@@ -35,3 +35,11 @@ func _physics_process(delta):
     sprite.flip_h = true
   elif vel.x > 0:
     sprite.flip_h = false
+
+func _on_Enemy_body_entered(body):
+  if body.name == 'Player':
+    get_tree().reload_current_scene()
+
+func collect_coin(value):
+  score += value
+  ui.set_score_text(score)
